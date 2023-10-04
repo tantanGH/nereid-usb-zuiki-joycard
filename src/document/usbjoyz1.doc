@@ -1,0 +1,12 @@
+USB JoyPad & Mouse Driver USBJOY ver.1.3e+z1
+
+これは Plastic氏 及び あく蔵氏 により開発された Nereid USB用ジョイパッド・マウスドライバ USBJOY.X 1.3e を
+ZUIKI X68000 Z JOYCARD (BLACK) でも利用できるようにtantanが一部改変を行ったものです。
+
+ご迷惑になりますのでくれぐれも両氏へのお問い合わせはご遠慮ください。
+何かあれば tantan (X/Twitter: @snakGH) まで。
+
+使い方は本アーカイブに含まれる usbjoy.x および usbjoy.def を使用し、-zオプションをつけて常駐します。
+残念ながら定義ファイルだけの対応ではカバーできなかったため、このような対応としてあります。
+
+2023.10.05 tantan

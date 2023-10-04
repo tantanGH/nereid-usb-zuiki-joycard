@@ -1,0 +1,222 @@
+NEREID_CTRL_0:	.equ	$00ece3f1
+NEREID_CTRL_1:	.equ	$00ecebf1
+NEREID_CTRL:	.equ	NEREID_CTRL_0
+
+JOY_UKEY:	.equ	$01
+JOY_DKEY:	.equ	$02
+JOY_LKEY:	.equ	$04
+JOY_RKEY:	.equ	$08
+
+JOY_BTN_A1:	.equ	$20
+JOY_BTN_B1:	.equ	$40
+JOY_BTN_A2:	.equ	$10
+JOY_BTN_B2:	.equ	$80
+
+SCC_COM_A	.equ	$0e98004
+SCC_DAT_A	.equ	$0e98006
+SCC_COM_B	.equ	$0e98000
+SCC_DAT_B	.equ	$0e98002
+
+NEREID_USB_ENA:	.equ	$01
+NEREID_USB_DSA:	.equ	$FE
+NEREID_USB_PON:	.equ	$02
+NEREID_USB_POF:	.equ	$FD
+NEREID_USB_ION:	.equ	$04
+NEREID_USB_IOF:	.equ	$FB
+NEREID_BM_ADDR:	.equ	$20
+NEREID_BM_SIZE:	.equ	$40
+NEREID_BM_ENA:	.equ	$80
+
+SL811HST_ADDR_0:	.equ	$00ece381
+SL811HST_DATA_0:	.equ	$00ece383
+SL811HST_ADDR_1:	.equ	$00eceb81
+SL811HST_DATA_1:	.equ	$00eceb83
+
+SL811HST_ADDR:		.equ	SL811HST_ADDR_0
+SL811HST_DATA:		.equ	SL811HST_DATA_0
+
+SL811_ADDR_REG		.reg	(a5)
+SL811_DATA_REG		.reg	(a6)
+
+IOCS_VECTBL:	.equ	$400
+
+DATA0_WR	.equ	$07
+DATA1_WR	.equ	$47
+DATA0_RD	.equ	$03
+DATA1_RD	.equ	$43
+
+CMD_SETUP	.equ	$01
+CMD_IN		.equ	$02
+CMD_INT		.equ	$03
+CMD_OUT		.equ	$04
+
+PID_SETUP	.equ	$D0	; 1101h
+PID_IN		.equ	$90	; 1001h
+PID_OUT		.equ	$10	; 0001h
+
+REG_CTRL_A	.equ	$00	; 
+REG_CTRL_B	.equ	$08	; 
+REG_BASE_ADR_A	.equ	$01	; 
+REG_XLEN_A	.equ	$02	; 
+REG_XLEN_B	.equ	$0A	; 
+REG_PID_ENDP_A	.equ	$03	; 書き込み時
+REG_PID_ENDP_B	.equ	$0B	; 書き込み時
+REG_INT_STAT_A	.equ	$03	; 読み込み時
+REG_INT_STAT_B	.equ	$0B	; 読み込み時
+REG_ADDR_A	.equ	$04	; 書き込み時
+REG_CNT_A	.equ	$04	; 読み込み時
+REG_INT_STATUS	.equ	$0D
+
+STS_ACK		.equ	0	; bit位置
+STS_ERR		.equ	1	;
+STS_OUT		.equ	2	;
+STS_NAK		.equ	6	;
+STS_STL		.equ	7	;
+
+EP0BUF		.equ	$40	; SL811HST内メモリースタート位置(64)
+EP0LEN		.equ	$40	; EP0のバッファの長さ
+
+SPEED_LOW	.equ	$00
+SPEED_FULL	.equ	$01
+SPEED_HIGH	.equ	$02
+
+cr:		.equ	$0d
+lf:		.equ	$0a
+
+;SL811_WRITE	.macro	str1,str2
+;		move.b	str1,SL811HST_ADDR
+;		move.b	str2,SL811HST_DATA
+;		.endm
+
+;SL811_READ	.macro	str1,str2
+;		move.b	str1,SL811HST_ADDR
+;		move.b	SL811HST_DATA,str2
+;		.endm
+
+GET_INT_TIME_START	.macro
+	.if (INT_TIME_PRINT=1)
+		move.b	#$0f,SL811HST_ADDR			; 割り込みイネーブルレジスタ
+		move.b	SL811HST_DATA,int_start_count		; 割り込み残り時間の取得
+	.endif
+			.endm
+
+GET_INT_TIME_OTWA	.macro
+	.if (INT_TIME_PRINT=1)
+		move.b	#$0f,SL811HST_ADDR			; 割り込みイネーブルレジスタ
+		move.b	SL811HST_DATA,int_ontheway_countA	; 割り込み残り時間の取得
+	.endif
+			.endm
+
+GET_INT_TIME_OTWB	.macro
+	.if (INT_TIME_PRINT=1)
+		move.b	#$0f,SL811HST_ADDR			; 割り込みイネーブルレジスタ
+		move.b	SL811HST_DATA,int_ontheway_countB	; 割り込み残り時間の取得
+	.endif
+			.endm
+
+GET_INT_TIME_END	.macro
+	.if (INT_TIME_PRINT=1)
+		move.b	#$0f,SL811HST_ADDR			; 割り込みイネーブルレジスタ
+		move.b	SL811HST_DATA,int_end_count		; 割り込み残り時間の取得
+	.endif
+			.endm
+
+
+
+
+_StrPrint	.macro	str1,str2,str3,str4,str5,str6
+		.sizem	sz,cnt
+		movem.l	d0/a1,-(sp)
+		lea	@string,a1
+		IOCS	_B_PRINT
+		movem.l	(sp)+,d0/a1
+
+		.data
+		.even
+	.if	cnt=1
+@string:	.dc.b	&str1,0
+	.elseif	cnt=2
+@string:	.dc.b	&str1,&str2,0
+	.elseif	cnt=3
+@string:	.dc.b	&str1,&str2,&str3,0
+	.elseif	cnt=4
+@string:	.dc.b	&str1,&str2,&str3,&str4,0
+	.elseif	cnt=5
+@string:	.dc.b	&str1,&str2,&str3,&str4,&str5,0
+	.elseif	cnt=6
+@string:	.dc.b	&str1,&str2,&str3,&str4,&str5,&str6,0
+	.else
+		.fail
+	.endif
+		.even
+
+		.text
+
+		.endm
+
+
+_StrPrint2	.macro	str1,str2,str3,str4,str5,str6
+	.if (STR_PRINT2_PRINT=1)
+		.sizem	sz,cnt
+		movem.l	d0/a1,-(sp)
+		lea	@string,a1
+		IOCS	_B_PRINT
+		movem.l	(sp)+,d0/a1
+
+		.data
+		.even
+	.if	cnt=1
+@string:	.dc.b	&str1,0
+	.elseif	cnt=2
+@string:	.dc.b	&str1,&str2,0
+	.elseif	cnt=3
+@string:	.dc.b	&str1,&str2,&str3,0
+	.elseif	cnt=4
+@string:	.dc.b	&str1,&str2,&str3,&str4,0
+	.elseif	cnt=5
+@string:	.dc.b	&str1,&str2,&str3,&str4,&str5,0
+	.elseif	cnt=6
+@string:	.dc.b	&str1,&str2,&str3,&str4,&str5,&str6,0
+	.else
+		.fail
+	.endif
+		.even
+
+		.text
+	.endif
+		.endm
+
+_open	macro	name,mode
+	move.w	mode,-(sp)
+	pea	name
+	dc.w	$ff3d
+	addq.l	#6,sp
+	endm
+
+_read	macro	fileno,dataptr,size
+	move.l	size,-(sp)
+	pea	dataptr
+	move.w	fileno,-(sp)
+	dc.w	$ff3f
+	lea	10(sp),sp
+	endm
+
+_close	macro	fileno
+	move.w	fileno,-(sp)
+	dc.w	$ff3e
+	addq.l	#2,sp
+	endm
+
+_exit	macro
+	dc.w	$ff00
+	endm
+
+	.offset	0
+joy_data:	.ds.b	1
+auto_int_cnt:	.ds.b	1
+auto_int_cnt_a:	.ds.b	1
+auto_data_a:	.ds.b	1
+auto_int_cnt_b:	.ds.b	1
+auto_data_b:	.ds.b	1
+	.text
+
