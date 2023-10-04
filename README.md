@@ -4,13 +4,13 @@ ZUIKI X68000 Z JOYCARD を X680x0 実機 + Nereid USB で使う覚書
 
 <img src='images/zpad3.jpeg'/>
 
---
+---
 
 ## はじめに
 
 この覚書は ZUIKI社より単独販売および X68000 Z PRODUCT EDITION に標準装備されている X68000 Z JOYCARD (BLACK) を Nereid USB を使って X680x0 実機に繋ぐための覚書です。
 
---
+---
 
 ## ゲームソフトでの利用
 
@@ -23,7 +23,7 @@ IOCSを使わず直接8255のレジスタ($e9a001,$e9a003)を読んでいるソ�
 
 <img src='images/zpad1.jpeg'/>
 
---
+---
 
 ## 更新履歴
 
