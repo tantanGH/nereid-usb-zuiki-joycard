@@ -56,8 +56,16 @@ IOCSを使わず直接8255のレジスタ($e9a001,$e9a003)を読んでいるソ�
 
 <img src='images/zpad1.jpeg'/>
 
+参考までに女帝戦記1,2,3用の差分パッチを置いておきます。
+* [JYOTEI_V1_USB.LZH](https://github.com/tantanGH/nereid-usb-zuiki-joycard/raw/main/JYOTEI_V1_USB.LZH)
+* [JYOTEI_V2_USB.LZH](https://github.com/tantanGH/nereid-usb-zuiki-joycard/raw/main/JYOTEI_V2_USB.LZH)
+* [JYOTEI_V3_USB.LZH](https://github.com/tantanGH/nereid-usb-zuiki-joycard/raw/main/JYOTEI_V3_USB.LZH)
+
+オリジナルの JYOTEI.X がLZX圧縮されている場合は一度 `lzx -d` で展開したバイナリに対して `bup` でパッチしてください。なお、購入した時期によって JYOTEI.X の内容が異なりパッチが当たらない可能性はあります。また、厳密に検証したわけでもありません。
+
 ---
 
 ## 更新履歴
 
+2023.10.05 ... 女帝戦記1,2,3用のパッチを置いた
 2023.10.05 ... 初版
