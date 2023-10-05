@@ -40,6 +40,8 @@ USBJOY.X ver.1.3e+z1
 
 <img src='images/zpad4.jpeg'/>
 
+なお、利用できるのは十字キーとb,aボタンおよびL,Rボタンです。START/SELECTボタンは対応していません。また、L,Rボタンは連射なしのb,aボタンの扱いになります。
+
 ---
 
 ## ゲームソフトでの利用
