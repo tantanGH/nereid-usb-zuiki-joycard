@@ -61,7 +61,7 @@ USBJOY.X ver.1.3e+z1
 
 <br/>
 
-超連射68Kの場合は、最新の1.10のXDFをダウンロードし、CRS68Kディレクトリに USBJOY.X と USBJOY.DEF をコピーします。CRS68K.BATでMCDRVの行のすぐ後に USBJOY.X -z を入れておけばokです。
+超連射68Kの場合は、最新の1.10のXDFをダウンロードし、SYSディレクトリに USBJOY.X と USBJOY.DEF をコピーします。AUTOEXEC.BATの先頭に USBJOY.X -z を入れておけばokです。
 
 ---
 
