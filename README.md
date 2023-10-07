@@ -38,9 +38,11 @@ USBJOY.X ver.1.3e+z1
 
 現在使っている usbjoy.x および usbjoy.def をバックアップした上で、この改変版の usbjoy.x / usbjoy.def と置き換えます。さらに常駐時に `-z` オプションを指定することで ZUIKI X68000 Z JOYCARD を認識させることができます。
 
-<img src='images/zpad4.jpeg'/>
-
 なお、利用できるのは十字キーとb,aボタンおよびL,Rボタンです。START/SELECTボタンは対応していません。L,Rボタンは連射なしのb,aボタンの扱いになります。
+
+また、`-c` モードには対応していません。
+
+<img src='images/zpad4.jpeg'/>
 
 ---
 
