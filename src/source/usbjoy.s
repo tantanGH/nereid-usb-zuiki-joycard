@@ -2,7 +2,7 @@
 ;==============================================================
 ;
 ;
-;　　　　USB JoyPad & Mouse Driver USBJOY ver.1.3e+z1
+;　　　　USB JoyPad & Mouse Driver USBJOY ver.1.3e+z2
 ;
 ;　　　　　　　　Copyright (C)2006-2009 by ぷらすちっく/あく蔵
 ;                          (C)2013 by tantan
@@ -141,7 +141,7 @@ optflg_C:
 		.dc.b	0
 optflg_X:
 		.dc.b	0
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 optflg_Z:
 		.dc.b	0
 ; ---------------------------
@@ -223,7 +223,7 @@ DescType	.ds.b	1		;
 DescLengthL	.ds.b	1		; 
 DescLengthH	.ds.b	1		; 
 
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 ;		.ds.b	4		; 7Byte
 ;MaxPacketSizeL:	.ds.b	1		; 
 ;MaxPacketSizeH:	.ds.b	1		; 
@@ -2038,7 +2038,7 @@ Sub_GetOption:
 		beq	option_C			;
 		cmpi.b	#'x',d0				; -xオプションが指定されているか？
 		beq	option_X			;
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 		cmpi.b	#'z',d0				; -zオプションが指定されているか？
 		beq	option_Z			;
 ; ---------------------------
@@ -2064,7 +2064,7 @@ option_X:
 		;オプションＸ処理
 		move.b	#1,optflg_X
 		bra	@f
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 option_Z:
 		;オプションＺ処理
 		move.b	#1,optflg_Z
@@ -2472,7 +2472,7 @@ full_speed_device:
 		; 現在対象外のデバイスなら常駐せずに終了
 		;(仮取得なのでTotalLengthのみの簡易チェック)
 
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 ;		cmpi.b	#34,TotalLengthL	; TotalLengthが34バイトのデバイスのみ対象
 ;		bne	no_joypad		; 
 		cmpi.b	#34,TotalLengthL	; TotalLengthが34バイトのデバイスは対象
@@ -2499,7 +2499,7 @@ full_speed_device:
 
 		move.b	#$01,usb_addr		; アドレス = 1
 		move.b	#$00,usb_endp		; エンドポイント = 0
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 ;		move.b	#34,usb_length		; データ転送長 = 34
 		move.b	TotalLengthL,usb_length ; データ転送長 = 34 または 41
 ; ---------------------------
@@ -2519,7 +2519,7 @@ full_speed_device:
 		cmpi.l	#$03_01_02_00,d0	; 接続されているHIDは標準的なマウスか？
 		bne	no_joypad
 @@:
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 		tst.b	optflg_Z
 		beq	@@f			; -zオプション指定がなければ何もしない
 		btst.b	#8,EndPointAddr		; 最初のエンドポイントはINか？
@@ -2827,7 +2827,7 @@ no_device:
 ;-----------------------------------------------------------
 		.even
 title_msg:
-		.dc.b	'USB JoyPad & Mouse Driver USBJOY ver.1.3e+z1 (C)2006-2009 plastic / akuzo / tantan',13,10,0
+		.dc.b	'USB JoyPad & Mouse Driver USBJOY ver.1.3e+z2 (C)2006-2009,2023 plastic / akuzo / tantan',13,10,0
 stay_msg_joy:
 		.dc.b	'ジョイパッドモードで常駐しました.',13,10,0
 stay_msg_mouse:
@@ -2840,7 +2840,7 @@ usage_msg:
 		.dc.b	'  -a2 : シンクロ連射(2frame毎にボタンのON/OFFを切り替え)',13,10
 		.dc.b	'  -c  : エンドポイントからのパケット内容チェックモード',13,10
 		.dc.b	'  -h  : ヘルプ表示',13,10
-; -------- patch +z1 --------
+; -------- patch +z2 --------
 ;		.dc.b	'  -x  : Xbox 360系のコントローラを使用する場合に指定',13,10,0
 		.dc.b	'  -x  : Xbox 360系のコントローラを使用する場合に指定',13,10
  	   	.dc.b   '  -z  : ZUIKI X68000 Z JOYCARD を使用する場合に指定',13,10,0
