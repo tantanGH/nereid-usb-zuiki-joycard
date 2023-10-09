@@ -27,22 +27,20 @@ Nereid は 68系サークル X-PowerStation (XPS) により開発された X680x
 ## Nereid USB 端子へのジョイパッド接続
 
 plastic氏 / あく蔵氏により開発された Nereid USB マウス・ジョイパッド用ドライバ USBJOY.X があります。
-このドライバは定義ファイルによって任意のUSBジョイパッドを対応させる設計となっているのですが、残念ながらZUIKI X68000 Z JOYCARDは定義ファイルだけでは対応しきれませんでした。このためやむを得ずドライバ本体を一部改変させて頂きました。
+このドライバは定義ファイルによって任意のUSBジョイパッドを対応させる設計となっているのですが、ZUIKI X68000 Z JOYCARDの場合は `-x` オプション(Xbox360 コントローラモード)が必須となります。
 
 <br/>
 
-USBJOY.X ver.1.3e+z1 
-* [USBJOY13EZ1.LZH](https://github.com/tantanGH/nereid-usb-zuiki-joycard/raw/main/USBJOY13EZ1.LZH)
+usbjoy.def for ZUIKI X68000 Z JOYCARD
+* [usbjoy-z2.zip](https://github.com/tantanGH/nereid-usb-zuiki-joycard/raw/main/usbjoy-z2.zip)
 
 <br/>
 
-現在使っている usbjoy.x および usbjoy.def をバックアップした上で、この改変版の usbjoy.x / usbjoy.def と置き換えます。さらに常駐時に `-z` オプションを指定することで ZUIKI X68000 Z JOYCARD を認識させることができます。
+現在使っている usbjoy.def をバックアップした上で、ダウンロードした usbjoy.def と置き換えます。さらに常駐時に `-x` オプションを指定することで ZUIKI X68000 Z JOYCARD を認識させることができます。USBJOY.X は最新の 1.3e でのみ確認しています。
 
 なお、利用できるのは十字キーとb,aボタンおよびL,Rボタンです。START/SELECTボタンは対応していません。L,Rボタンは連射なしのb,aボタンの扱いになります。
 
-また、`-c` モードを使う場合は `-z` と同時に指定してください。
-
-<img src='images/zpad4.jpeg'/>
+また、`-c` モードを使う場合は `-x` と同時に指定してください。
 
 ---
 
@@ -96,6 +94,7 @@ IOCSを使わず直接8255のレジスタ($e9a001)を読んでいるソフトの
 
 ## 更新履歴
 
+- 2023.10.09 ... オリジナルの-xオプションでも動作するようなので、定義ファイルのみの提供とした
 - 2023.10.07 ... 超連射68Kについて追記
 - 2023.10.05 ... 外道烈伝のパッチを置いた
 - 2023.10.05 ... 女帝戦記1,2,3用のパッチを置いた
