@@ -89,7 +89,6 @@ VID	PID	LKEY	RKEY	UKEY	DKEY	LBTN1	RBTN1	LBTN2	RBTN2	PSIZE	INTR	REPID
 045E	028E	0202	0203	0200	0201	0304	0305	0306	0307	-	-	-	'Microsoft Xbox 360 Controller
 0F0D	000D	0202	0203	0200	0201	84FF	0304	0305	0306	-	-	-	'HORI HX3-07 (Fighting Stick EX2 : Xbox 360)
 33DD	0013	8201	0207	8301	0307	0001	0002	0004	0005	-	-	-	'ZUIKI X68000 Z JOYCARD(BLACK)
-17A7	0005	8300	83FF	8400	84FF	0002	0001	0000	0004	-	-	-	'MICOMSOFT XE1AJ-USB (CYBER STICK)
 .
 ----------------------------------------------------------------------------------------------------------------------------------------
 ■PSIZEとINTRについての補足
@@ -107,10 +106,3 @@ VID	PID	LKEY	RKEY	UKEY	DKEY	LBTN1	RBTN1	LBTN2	RBTN2	PSIZE	INTR	REPID
 	連射機能を使う際、同期が合わない場合などに微調整してください。
 
 	あまりに周期が短いと付加が高くなり、システムが暴走するのであくまで微調整程度に。
-
-■MICOMSOFT XE1AJ-USB (CYBER STICK)についての補足
-	パネル上のA/B/C(A)及びスティックのA/Bと連射スイッチのみ有効です。
-	デジタルのみの対応です。MODE切り替えスイッチをDIGITAL側にしてご使用ください。
-	A/B:NORMAL,A HOLD:OFF,TRIGGER SPEED A/B:MIN,B:MANUAL,MODE:DIGITALでのみご使用ください
-	途中でスイッチを切り替えると挙動がおかしくなることがあります。
-
